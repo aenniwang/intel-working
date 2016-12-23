@@ -1,0 +1,1609 @@
+debug.txt:33: Error in sourced command file:
+No symbol table is loaded.  Use the "file" command.
+quit
+Breakpoint 1 at 0x400763: file memchr_bench.cc, line 90.
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$1 = 0
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$2 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$3 = {0x78, 0x2e <repeats 31 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$4 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$5 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$6 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.x86_64
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$7 = {0x78, 0x2e <repeats 31 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$8 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$9 = {0xff, 0x0 <repeats 31 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$10 = 0x1
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$11 = 1
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$12 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$13 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$14 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$15 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$16 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$17 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$18 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$19 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$20 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$21 = 2
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$22 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$23 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$24 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$25 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$26 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$27 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$28 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$29 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$30 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$31 = 3
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$32 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$33 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$34 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$35 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$36 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$37 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$38 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$39 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$40 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$41 = 4
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$42 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$43 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$44 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$45 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$46 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$47 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$48 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$49 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$50 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$51 = 5
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$52 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$53 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$54 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$55 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$56 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$57 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$58 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$59 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$60 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$61 = 6
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$62 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$63 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$64 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$65 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$66 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$67 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$68 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$69 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$70 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$71 = 7
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$72 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$73 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$74 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$75 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$76 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$77 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$78 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$79 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$80 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$81 = 8
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$82 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$83 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$84 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$85 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$86 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$87 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$88 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$89 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$90 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$91 = 9
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$92 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$93 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$94 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$95 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$96 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$97 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$98 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$99 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$100 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$101 = 10
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$102 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$103 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$104 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$105 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$106 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$107 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$108 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$109 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$110 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$111 = 11
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$112 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$113 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$114 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$115 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$116 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$117 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$118 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$119 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$120 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$121 = 12
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$122 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$123 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$124 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$125 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$126 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$127 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$128 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$129 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$130 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$131 = 13
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$132 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$133 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$134 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$135 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$136 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$137 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$138 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$139 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$140 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$141 = 14
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$142 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$143 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$144 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$145 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$146 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$147 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$148 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$149 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$150 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$151 = 15
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$152 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$153 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$154 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$155 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$156 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$157 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$158 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$159 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$160 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$161 = 16
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$162 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$163 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$164 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$165 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$166 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$167 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$168 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$169 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$170 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$171 = 17
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$172 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$173 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$174 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$175 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$176 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$177 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$178 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$179 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$180 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$181 = 18
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$182 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$183 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$184 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$185 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$186 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$187 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$188 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$189 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$190 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$191 = 19
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$192 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$193 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$194 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$195 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$196 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$197 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$198 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$199 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$200 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$201 = 20
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$202 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$203 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$204 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$205 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$206 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$207 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$208 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$209 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$210 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$211 = 21
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$212 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$213 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$214 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$215 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$216 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$217 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$218 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$219 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$220 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$221 = 22
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$222 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$223 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$224 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$225 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$226 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$227 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$228 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$229 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$230 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$231 = 23
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$232 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$233 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$234 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$235 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$236 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$237 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$238 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$239 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$240 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$241 = 24
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$242 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$243 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$244 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$245 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$246 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$247 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$248 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$249 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$250 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$251 = 25
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$252 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$253 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$254 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$255 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$256 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$257 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$258 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$259 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$260 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$261 = 26
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$262 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$263 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$264 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$265 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$266 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$267 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$268 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$269 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$270 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$271 = 27
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$272 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$273 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$274 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$275 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$276 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$277 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$278 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$279 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$280 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$281 = 28
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$282 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$283 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$284 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$285 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$286 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$287 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$288 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$289 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$290 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$291 = 29
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$292 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$293 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$294 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$295 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$296 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$297 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$298 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$299 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$300 = 0x0
+
+Breakpoint 1, 0x0000000000400763 in avx2_strzhchr (str=0x7ffffff09a90 "x", '.' <repeats 199 times>..., chr=120) at memchr_bench.cc:90
+90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400763 <avx2_strzhchr(char const*, int)+259>:	vmovdqu (%rcx),%ymm1
+"------------------LOOP "$301 = 30
+0x0000000000400767	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400767 <avx2_strzhchr(char const*, int)+263>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+### mask for 0x80: 
+$302 = {0x80 <repeats 32 times>}
+### Input Buffer: 
+$303 = {0x2e <repeats 32 times>}
+0x000000000040076b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40076b <avx2_strzhchr(char const*, int)+267>:	vperm2i128 $0x8,%ymm0,%ymm0,%ymm2
+### Any byte is 0x80, then set it to 0xff: 
+$304 = {0x0 <repeats 32 times>}
+0x0000000000400771	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400771 <avx2_strzhchr(char const*, int)+273>:	vpalignr $0xf,%ymm2,%ymm0,%ymm2
+0x0000000000400777	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400777 <avx2_strzhchr(char const*, int)+279>:	vpor   %ymm0,%ymm2,%ymm0
+### Corresponding lower byte should be masked to 0xff : 
+$305 = {0x0 <repeats 32 times>}
+0x000000000040077b	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077b <avx2_strzhchr(char const*, int)+283>:	vpandn %ymm1,%ymm0,%ymm0
+### Mask all Zh character: 
+"$306 = {0x0 <repeats 32 times>}
+0x000000000040077f	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40077f <avx2_strzhchr(char const*, int)+287>:	vpbroadcastb (%rdx),%ymm1
+### Any Zh character in source string should be masked to 00: 
+$307 = {0x2e <repeats 32 times>}
+0x0000000000400784	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400784 <avx2_strzhchr(char const*, int)+292>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+### expand chr to all bytes of ymm1:
+$308 = {0x78 <repeats 32 times>}
+0x0000000000400788	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x400788 <avx2_strzhchr(char const*, int)+296>:	vpmovmskb %ymm0,%eax
+### Compare masked source string with target character: 
+$309 = {0x0 <repeats 32 times>}
+0x000000000040078c	90	                :"%xmm0","%xmm1","%xmm2","%eax","%ebx");
+1: x/i $pc
+=> 0x40078c <avx2_strzhchr(char const*, int)+300>:	xor    %ebx,%ebx
+### extract the MSB bit of echo byte
+$310 = 0x0
+[Inferior 1 (process 22210) exited with code 01]
+debug.txt:41: Error in sourced command file:
+No frame selected.
+quit
+Breakpoint 1 at 0x400763: file memchr_bench.cc, line 92.
+[Inferior 1 (process 26996) exited with code 01]
+debug.txt:44: Error in sourced command file:
+No symbol "i" in current context.
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.x86_64
+quit
+Breakpoint 1 at 0x400763: file memchr_bench.cc, line 92.
+[Inferior 1 (process 27044) exited with code 01]
+debug.txt:44: Error in sourced command file:
+No symbol "i" in current context.
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.x86_64
+quit
+Breakpoint 1 at 0x400763: file memchr_bench.cc, line 91.
+[Inferior 1 (process 27059) exited with code 01]
+debug.txt:44: Error in sourced command file:
+No symbol "i" in current context.
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.x86_64
+Undefined command: "exit".  Try "help".
+quit

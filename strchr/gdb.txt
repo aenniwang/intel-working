@@ -1,0 +1,270 @@
+debug.txt:3: Error in sourced command file:
+Undefined set logging command: "overwirte off".  Try "help set logging".
+Set logging options
+
+List of set logging subcommands:
+
+set logging file -- Set the current logfile
+set logging off -- Disable logging
+set logging on -- Enable logging
+set logging overwrite -- Set whether logging overwrites or appends to the log file
+set logging redirect -- Set the logging output mode
+
+Type "help set logging" followed by set logging subcommand name for full 
+documentation.
+Type "apropos word" to search for commands related to "word".
+Command name abbreviations are allowed if unambiguous.
+Already logging to gdb.txt.
+Breakpoint 1 at 0x40074d: file main.c, line 77.
+
+Breakpoint 1, 0x000000000040074d in avx2_strzhchr (
+    str=0x7fffffffc113 "\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\200\026\027\200\030\200\031\032\033\034\035\036\037 !\"#$%&'\200(()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~", chr=40) at main.c:77
+77	        asm volatile (
+$1 = {-128 <repeats 32 times>}
+$2 = {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 
+  -128, 22, 23, -128, 24, -128, 25, 26, 27, 28, 29, 30, 31, 32}
+Breakpoint 2 at 0x40074d: file main.c, line 77.
+
+Breakpoint 1, 0x000000000040074d in avx2_strzhchr (
+    str=0x7fffffffc113 "\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\200\026\027\200\030\200\031\032\033\034\035\036\037 !\"#$%&'\200(()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~", chr=40) at main.c:77
+77	        asm volatile (
+$3 = {-128 <repeats 32 times>}
+0x0000000000400751	77	        asm volatile (
+0x0000000000400757	77	        asm volatile (
+$4 = {0x0 <repeats 32 times>}
+0x000000000040075d	77	        asm volatile (
+$5 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0x0 <repeats 24 times>}
+0x0000000000400761	77	        asm volatile (
+$6 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0x0 <repeats 24 times>}
+0x0000000000400765	77	        asm volatile (
+$7 = {0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x80, 0x28, 0x28, 0x29, 
+  0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 
+  0x36, 0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e}
+0x000000000040076a	77	        asm volatile (
+$8 = {0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x0, 0x0, 0x28, 0x28, 0x29, 0x2a, 
+  0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 
+  0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e}
+0x000000000040076e	77	        asm volatile (
+$9 = 0x80808080
+Breakpoint 1 at 0x40074d: file main.c, line 77.
+
+Breakpoint 1, 0x000000000040074d in avx2_strzhchr (
+    str=0x7fffffffc113 "\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\200\026\027\200\030\200\031\032\033\034\035\036\037 !\"#$%&'\200(()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~", chr=40) at main.c:77
+77	        asm volatile (
+1: x/3i $pc
+=> 0x40074d <avx2_strzhchr+198>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+   0x400751 <avx2_strzhchr+202>:	vperm2i128 $0x18,%ymm0,%ymm0,%ymm2
+   0x400757 <avx2_strzhchr+208>:	vpalignr $0x1,%ymm0,%ymm2,%ymm2
+$1 = {-128 <repeats 32 times>}
+$2 = {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 
+  -128, 22, 23, -128, 24, -128, 25, 26, 27, 28, 29, 30, 31, 32}
+Breakpoint 2 at 0x40074d: file main.c, line 77.
+
+Breakpoint 1, 0x000000000040074d in avx2_strzhchr (
+    str=0x7fffffffc113 "\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\200\026\027\200\030\200\031\032\033\034\035\036\037 !\"#$%&'\200(()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~", chr=40) at main.c:77
+77	        asm volatile (
+1: x/3i $pc
+=> 0x40074d <avx2_strzhchr+198>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+   0x400751 <avx2_strzhchr+202>:	vperm2i128 $0x18,%ymm0,%ymm0,%ymm2
+   0x400757 <avx2_strzhchr+208>:	vpalignr $0x1,%ymm0,%ymm2,%ymm2
+$3 = {-128 <repeats 32 times>}
+0x0000000000400751	77	        asm volatile (
+1: x/3i $pc
+=> 0x400751 <avx2_strzhchr+202>:	vperm2i128 $0x18,%ymm0,%ymm0,%ymm2
+   0x400757 <avx2_strzhchr+208>:	vpalignr $0x1,%ymm0,%ymm2,%ymm2
+   0x40075d <avx2_strzhchr+214>:	vpor   %ymm0,%ymm2,%ymm0
+0x0000000000400757	77	        asm volatile (
+1: x/3i $pc
+=> 0x400757 <avx2_strzhchr+208>:	vpalignr $0x1,%ymm0,%ymm2,%ymm2
+   0x40075d <avx2_strzhchr+214>:	vpor   %ymm0,%ymm2,%ymm0
+   0x400761 <avx2_strzhchr+218>:	vpandn %ymm1,%ymm0,%ymm0
+$4 = {0x0 <repeats 32 times>}
+0x000000000040075d	77	        asm volatile (
+1: x/3i $pc
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.x86_64
+=> 0x40075d <avx2_strzhchr+214>:	vpor   %ymm0,%ymm2,%ymm0
+   0x400761 <avx2_strzhchr+218>:	vpandn %ymm1,%ymm0,%ymm0
+   0x400765 <avx2_strzhchr+222>:	vpbroadcastb (%rdx),%ymm1
+$5 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0x0 <repeats 24 times>}
+0x0000000000400761	77	        asm volatile (
+1: x/3i $pc
+=> 0x400761 <avx2_strzhchr+218>:	vpandn %ymm1,%ymm0,%ymm0
+   0x400765 <avx2_strzhchr+222>:	vpbroadcastb (%rdx),%ymm1
+   0x40076a <avx2_strzhchr+227>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+$6 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0x0 <repeats 24 times>}
+0x0000000000400765	77	        asm volatile (
+1: x/3i $pc
+=> 0x400765 <avx2_strzhchr+222>:	vpbroadcastb (%rdx),%ymm1
+   0x40076a <avx2_strzhchr+227>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+   0x40076e <avx2_strzhchr+231>:	vpmovmskb %ymm0,%eax
+$7 = {0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x80, 0x28, 0x28, 0x29, 
+  0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 
+  0x36, 0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e}
+0x000000000040076a	77	        asm volatile (
+1: x/3i $pc
+=> 0x40076a <avx2_strzhchr+227>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+   0x40076e <avx2_strzhchr+231>:	vpmovmskb %ymm0,%eax
+   0x400772 <avx2_strzhchr+235>:	bsf    %eax,%edx
+$8 = {0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x0, 0x0, 0x28, 0x28, 0x29, 0x2a, 
+  0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 
+  0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e}
+0x000000000040076e	77	        asm volatile (
+1: x/3i $pc
+=> 0x40076e <avx2_strzhchr+231>:	vpmovmskb %ymm0,%eax
+   0x400772 <avx2_strzhchr+235>:	bsf    %eax,%edx
+   0x400775 <avx2_strzhchr+238>:	xor    %eax,%eax
+$9 = 0x80808080
+Breakpoint 1 at 0x40074d: file main.c, line 77.
+
+Breakpoint 1, 0x000000000040074d in avx2_strzhchr (
+    str=0x7fffffffc113 "\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\200\026\027\200\030\200\031\032\033\034\035\036\037 !\"#$%&'\200(()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~", chr=40) at main.c:77
+77	        asm volatile (
+1: x/3i $pc
+=> 0x40074d <avx2_strzhchr+198>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+   0x400751 <avx2_strzhchr+202>:	vperm2i128 $0x18,%ymm0,%ymm0,%ymm2
+   0x400757 <avx2_strzhchr+208>:	vpalignr $0x1,%ymm0,%ymm2,%ymm2
+"mask for 0x80: 
+"$1 = {-128 <repeats 32 times>}
+"Input Buffer: 
+"$2 = {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 
+  -128, 22, 23, -128, 24, -128, 25, 26, 27, 28, 29, 30, 31, 32}
+Breakpoint 2 at 0x40074d: file main.c, line 77.
+
+Breakpoint 1, 0x000000000040074d in avx2_strzhchr (
+    str=0x7fffffffc113 "\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\200\026\027\200\030\200\031\032\033\034\035\036\037 !\"#$%&'\200(()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~", chr=40) at main.c:77
+77	        asm volatile (
+1: x/3i $pc
+=> 0x40074d <avx2_strzhchr+198>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+   0x400751 <avx2_strzhchr+202>:	vperm2i128 $0x18,%ymm0,%ymm0,%ymm2
+   0x400757 <avx2_strzhchr+208>:	vpalignr $0x1,%ymm0,%ymm2,%ymm2
+"Any byte is 0x80, then set it to 0xff: 
+"$3 = {-128 <repeats 32 times>}
+0x0000000000400751	77	        asm volatile (
+1: x/3i $pc
+=> 0x400751 <avx2_strzhchr+202>:	vperm2i128 $0x18,%ymm0,%ymm0,%ymm2
+   0x400757 <avx2_strzhchr+208>:	vpalignr $0x1,%ymm0,%ymm2,%ymm2
+   0x40075d <avx2_strzhchr+214>:	vpor   %ymm0,%ymm2,%ymm0
+0x0000000000400757	77	        asm volatile (
+1: x/3i $pc
+=> 0x400757 <avx2_strzhchr+208>:	vpalignr $0x1,%ymm0,%ymm2,%ymm2
+   0x40075d <avx2_strzhchr+214>:	vpor   %ymm0,%ymm2,%ymm0
+   0x400761 <avx2_strzhchr+218>:	vpandn %ymm1,%ymm0,%ymm0
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.x86_64
+"Corresponding lower byte should be masked to 0xff : 
+"$4 = {0x0 <repeats 32 times>}
+0x000000000040075d	77	        asm volatile (
+1: x/3i $pc
+=> 0x40075d <avx2_strzhchr+214>:	vpor   %ymm0,%ymm2,%ymm0
+   0x400761 <avx2_strzhchr+218>:	vpandn %ymm1,%ymm0,%ymm0
+   0x400765 <avx2_strzhchr+222>:	vpbroadcastb (%rdx),%ymm1
+"Mask all Zh character: 
+"$5 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0x0 <repeats 24 times>}
+0x0000000000400761	77	        asm volatile (
+1: x/3i $pc
+=> 0x400761 <avx2_strzhchr+218>:	vpandn %ymm1,%ymm0,%ymm0
+   0x400765 <avx2_strzhchr+222>:	vpbroadcastb (%rdx),%ymm1
+   0x40076a <avx2_strzhchr+227>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+"Any Zh character in source string should be masked to 00: 
+"$6 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0x0 <repeats 24 times>}
+0x0000000000400765	77	        asm volatile (
+1: x/3i $pc
+=> 0x400765 <avx2_strzhchr+222>:	vpbroadcastb (%rdx),%ymm1
+   0x40076a <avx2_strzhchr+227>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+   0x40076e <avx2_strzhchr+231>:	vpmovmskb %ymm0,%eax
+"expand chr to all bytes of ymm1:
+"$7 = {0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x80, 0x28, 0x28, 0x29, 
+  0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 
+  0x36, 0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e}
+0x000000000040076a	77	        asm volatile (
+1: x/3i $pc
+=> 0x40076a <avx2_strzhchr+227>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+   0x40076e <avx2_strzhchr+231>:	vpmovmskb %ymm0,%eax
+   0x400772 <avx2_strzhchr+235>:	bsf    %eax,%edx
+"Compare masked source string with target character: 
+"$8 = {0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x0, 0x0, 0x28, 0x28, 0x29, 0x2a, 
+  0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 
+  0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e}
+0x000000000040076e	77	        asm volatile (
+1: x/3i $pc
+=> 0x40076e <avx2_strzhchr+231>:	vpmovmskb %ymm0,%eax
+   0x400772 <avx2_strzhchr+235>:	bsf    %eax,%edx
+   0x400775 <avx2_strzhchr+238>:	xor    %eax,%eax
+"extract the MSB bit of echo byte
+"$9 = 0x80808080
+Breakpoint 1 at 0x40074d: file main.c, line 77.
+
+Breakpoint 1, 0x000000000040074d in avx2_strzhchr (
+    str=0x7fffffffc113 "\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\200\026\027\200\030\200\031\032\033\034\035\036\037 !\"#$%&'\200(()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~", chr=40) at main.c:77
+77	        asm volatile (
+1: x/3i $pc
+=> 0x40074d <avx2_strzhchr+198>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+   0x400751 <avx2_strzhchr+202>:	vperm2i128 $0x18,%ymm0,%ymm0,%ymm2
+   0x400757 <avx2_strzhchr+208>:	vpalignr $0x1,%ymm0,%ymm2,%ymm2
+"mask for 0x80: 
+"$1 = {-128 <repeats 32 times>}
+"Input Buffer: 
+"$2 = {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 
+  -128, 22, 23, -128, 24, -128, 25, 26, 27, 28, 29, 30, 31, 32}
+Breakpoint 2 at 0x40074d: file main.c, line 77.
+
+Breakpoint 1, 0x000000000040074d in avx2_strzhchr (
+    str=0x7fffffffc113 "\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\200\026\027\200\030\200\031\032\033\034\035\036\037 !\"#$%&'\200(()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~", chr=40) at main.c:77
+77	        asm volatile (
+1: x/3i $pc
+=> 0x40074d <avx2_strzhchr+198>:	vpcmpeqb %ymm1,%ymm0,%ymm0
+   0x400751 <avx2_strzhchr+202>:	vperm2i128 $0x18,%ymm0,%ymm0,%ymm2
+   0x400757 <avx2_strzhchr+208>:	vpalignr $0x1,%ymm0,%ymm2,%ymm2
+"Any byte is 0x80, then set it to 0xff: 
+"$3 = {-128 <repeats 32 times>}
+0x0000000000400751	77	        asm volatile (
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.x86_64
+1: x/3i $pc
+=> 0x400751 <avx2_strzhchr+202>:	vperm2i128 $0x18,%ymm0,%ymm0,%ymm2
+   0x400757 <avx2_strzhchr+208>:	vpalignr $0x1,%ymm0,%ymm2,%ymm2
+   0x40075d <avx2_strzhchr+214>:	vpor   %ymm0,%ymm2,%ymm0
+0x0000000000400757	77	        asm volatile (
+1: x/3i $pc
+=> 0x400757 <avx2_strzhchr+208>:	vpalignr $0x1,%ymm0,%ymm2,%ymm2
+   0x40075d <avx2_strzhchr+214>:	vpor   %ymm0,%ymm2,%ymm0
+   0x400761 <avx2_strzhchr+218>:	vpandn %ymm1,%ymm0,%ymm0
+"Corresponding lower byte should be masked to 0xff : 
+"$4 = {0x0 <repeats 32 times>}
+0x000000000040075d	77	        asm volatile (
+1: x/3i $pc
+=> 0x40075d <avx2_strzhchr+214>:	vpor   %ymm0,%ymm2,%ymm0
+   0x400761 <avx2_strzhchr+218>:	vpandn %ymm1,%ymm0,%ymm0
+   0x400765 <avx2_strzhchr+222>:	vpbroadcastb (%rdx),%ymm1
+"Mask all Zh character: 
+"$5 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0x0 <repeats 24 times>}
+0x0000000000400761	77	        asm volatile (
+1: x/3i $pc
+=> 0x400761 <avx2_strzhchr+218>:	vpandn %ymm1,%ymm0,%ymm0
+   0x400765 <avx2_strzhchr+222>:	vpbroadcastb (%rdx),%ymm1
+   0x40076a <avx2_strzhchr+227>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+"Any Zh character in source string should be masked to 00: 
+"$6 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0x0 <repeats 24 times>}
+0x0000000000400765	77	        asm volatile (
+1: x/3i $pc
+=> 0x400765 <avx2_strzhchr+222>:	vpbroadcastb (%rdx),%ymm1
+   0x40076a <avx2_strzhchr+227>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+   0x40076e <avx2_strzhchr+231>:	vpmovmskb %ymm0,%eax
+"expand chr to all bytes of ymm1:
+"$7 = {0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x80, 0x28, 0x28, 0x29, 
+  0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 
+  0x36, 0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e}
+0x000000000040076a	77	        asm volatile (
+1: x/3i $pc
+=> 0x40076a <avx2_strzhchr+227>:	vpcmpeqb %ymm0,%ymm1,%ymm0
+   0x40076e <avx2_strzhchr+231>:	vpmovmskb %ymm0,%eax
+   0x400772 <avx2_strzhchr+235>:	bsf    %eax,%edx
+"Compare masked source string with target character: 
+"$8 = {0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x0, 0x0, 0x28, 0x28, 0x29, 0x2a, 
+  0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 
+  0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e}
+0x000000000040076e	77	        asm volatile (
+1: x/3i $pc
+=> 0x40076e <avx2_strzhchr+231>:	vpmovmskb %ymm0,%eax
+   0x400772 <avx2_strzhchr+235>:	bsf    %eax,%edx
+   0x400775 <avx2_strzhchr+238>:	xor    %eax,%eax
+"extract the MSB bit of echo byte
+"$9 = 0x80808080

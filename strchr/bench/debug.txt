@@ -1,0 +1,44 @@
+define avx2_32byts_debug
+    ni
+    echo ### mask for 0x80: \n
+    p/x $ymm0.v32_int8
+    echo ### Input Buffer: \n
+    p/x $ymm1.v32_int8
+    ni
+    echo ### Any byte is 0x80, then set it to 0xff: \n
+    p/x $ymm0.v32_int8
+    ni
+    ni
+    echo ### Corresponding lower byte should be masked to 0xff : \n
+    p/x $ymm2.v32_int8
+    ni
+    echo ### Mask all Zh character: \n"
+    p/x $ymm0.v32_int8
+    ni
+    echo ### Any Zh character in source string should be masked to 00: \n
+    p/x $ymm0.v32_int8
+    ni
+    echo ### expand chr to all bytes of ymm1:\n
+    p/x $ymm1.v32_int8
+    ni
+    echo ### Compare masked source string with target character: \n
+    p/x $ymm0.v32_int8
+    ni 
+    echo ### extract the MSB bit of echo byte\n
+    p/x $eax
+    ni
+    echo ### BSR output
+    p/x $
+end
+
+set logging file strstr.log
+set logging on
+b *(avx2_strzhchr +259)
+display /1i $pc
+r
+while(i<avx2_loops)
+    echo "------------------LOOP "
+    p i
+    avx2_32byts_debug
+    c
+end
