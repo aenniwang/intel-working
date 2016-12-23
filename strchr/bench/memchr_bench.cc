@@ -24,6 +24,7 @@
 
 #include <immintrin.h>
 
+char *sse_strzhchr(const char *s, int c);
 char *strzhchr(register const char *str, int chr) {
     static int i;
     if (str == NULL) {
@@ -70,6 +71,7 @@ char *strzhchr_8(register const char *str, int chr) {
 }
 #endif
 
+#if 0
 char * avx2_strzhchr_small(const char *str, int chr){
     int found;
     int offset;
@@ -281,6 +283,7 @@ char * avx2_strzhchr(const char *str, int chr){
     return NULL;
 }
 
+#endif
 //////////////////////////////////////////////////////////////////////////////
 // glibc functions
 
@@ -492,7 +495,8 @@ int main() {
 //  BENCH(glibc_strchr, 'x');
 //  BENCH(strchr, 'x');
   BENCH(strzhchr,'x');
-  BENCH(avx2_strzhchr,'x');
-  BENCH(avx2_strzhchr_small,'x');
-  BENCH(avx2_strzhchr_2,'x');
+//  BENCH(avx2_strzhchr,'x');
+ // BENCH(avx2_strzhchr_small,'x');
+ // BENCH(avx2_strzhchr_2,'x');
+  BENCH(sse_strzhchr,'x');
 }

@@ -1,2 +1,2 @@
 all:
-	gcc -mavx2 -O3 -static-libgcc -masm=intel memchr_bench.cc
+	gcc  -masm=intel sse_strzhchr.s  memchr_bench.c  -std=c99
