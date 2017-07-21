@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from mpl_toolkits.axes_grid.anchored_artists import AnchoredText
+
 
 verify_data = True
 
@@ -193,17 +195,24 @@ class VisualizeAC:
             dic_cpu_util[cpu_model_name] = cpu_utils
 
         plt.figure(self.pltpic)
+        max_y = 0
         for cpu_model in self.dic_host_type:
             cpu_utils = dic_cpu_util[cpu_model]
             times = sorted(cpu_utils)
             '''Average the data'''
             utils = [cpu_utils[times[i]][1] / cpu_utils[times[i]][0] for i in range(len(times))]
-
             t_min = min(times)
             times = map(lambda x: x - t_min, times)
+            max_y = max(utils) if max_y < max(utils) else max_y
             plt.plot(times, utils, colors[self.dic_host_type[cpu_model]])
-
-        plt.title("Average utilization for Clusters")
+        for cpu_model in self.dic_host_type:
+            cpu_type = self.dic_host_type[cpu_model]
+            plt.text(0, max_y-2*cpu_type, cpu_model, color=colors[cpu_type], fontsize=8)
+        if from_sys_user:
+            source_text = "sys+usr"
+        else:
+            source_text = "UTIL"
+        plt.title("Average CPU Utilization (%s)" % source_text)
         plt.xlabel("Time")
         self.pltpic += 1
 
@@ -411,6 +420,7 @@ class VisualizeAC:
         self.pltpic += (1 + len(self.dic_host_type))
         """
         plt.figure(self.pltpic)
+        max_tms = 0
         for cpu_model in self.dic_host_type:
             cpu_tmpermin = dic_cpu_tmpermin[cpu_model]
             times = sorted(cpu_tmpermin)
@@ -419,7 +429,11 @@ class VisualizeAC:
 
             t_min = min(times)
             times = map(lambda x: x-t_min, times)
+            max_tms = max(tms) if max_tms < max(tms) else max_tms
             plt.plot(times, tms, colors[self.dic_host_type[cpu_model]])
+        for cpu_model in self.dic_host_type:
+            cpu_type = self.dic_host_type[cpu_model]
+            plt.text(0, max_tms-13000*cpu_type, cpu_model, color=colors[cpu_type], fontsize=8)
 
         plt.title("Average tm for Clusters")
         plt.xlabel("Time")
@@ -451,7 +465,6 @@ class VisualizeAC:
         for i in range(0, len(self.data_items)):
             type = self.data_items[i][self.dic_caption['CPU_MODEL_NAME']]
             host = self.data_items[i][self.dic_caption['INSTANCE']]
-            print type
             if host not in self.data_tm:
                 continue
             tm_per_host = self.data_tm[host]
@@ -595,15 +608,15 @@ class VisualizeAC:
 ac = VisualizeAC()
 ac.parse_deploy_info()
 ac.parse_cpu_utilization()
-#ac.parse_host_pressure()
-#ac.draw_cpu_pressure()
-#ac.parse_host_tm()
-#ac.draw_cpu_tm()
+ac.parse_host_pressure()
+ac.draw_cpu_pressure()
+ac.parse_host_tm()
+ac.draw_cpu_tm()
 ac.parse_cpu_util_sys_user()
-ac.draw_unified_qps_cpu_utilization()
-ac.draw_unified_qps_cpu_utilization(True)
+#ac.draw_unified_qps_cpu_utilization()
+#ac.draw_unified_qps_cpu_utilization(True)
 
-ac.draw_cpu_utils()
 ac.draw_cpu_utils(True)
+ac.draw_cpu_utils()
 
 plt.show()
